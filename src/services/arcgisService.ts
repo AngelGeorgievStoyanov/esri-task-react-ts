@@ -1,20 +1,19 @@
-const apiURL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/';
 
+import {apiURL} from '../utils/baseUrl';
 
 
 
 export async function findSuggestAdress(adress: string) {
 
-
-    const response = await fetch(`${apiURL}/suggest?f=json&text=${adress}`)
-
-    return response.json()
-}
+    const response = await fetch(`${apiURL}/suggest?f=json&text=${adress}`);
+    
+    return response.json();
+};
 
 
 
 export async function findAddress(adress: string) {
 
-    const response = await fetch(`${apiURL}/findAddressCandidates?SingleLine=${adress}&f=json`)
-    return response.json()
-}
+    const response = await fetch(`${apiURL}/findAddressCandidates?SingleLine=${adress}&f=json`);
+    return response.json();
+};

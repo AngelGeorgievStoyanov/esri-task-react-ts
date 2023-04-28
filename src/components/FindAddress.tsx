@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, FC, ReactElement } from "react";
-import './FindAddress.css'
+import './FindAddress.css';
 
 interface FindAddressProps {
 

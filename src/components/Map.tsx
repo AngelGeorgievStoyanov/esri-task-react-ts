@@ -1,6 +1,7 @@
 import MapView from "esri/views/MapView";
 import { FC, ReactElement, useEffect, useRef } from "react";
 import { loadModules } from 'esri-loader';
+import './Map.css';
 
 interface MapProps {
     center: number[],

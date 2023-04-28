@@ -4,18 +4,19 @@ import Header from './components/Header';
 import FindAddress from './components/FindAddress';
 import Footer from './components/Footer';
 import Map from './components/Map';
-import * as arcgisService from './services/arcgisService'
+import * as arcgisService from './services/arcgisService';
+import ErrorBoundary from './utils/ErrorBoundary';
 
-const centerMap = [23.321590139866355, 42.697866831005435];
+const centerMap = [23.321590139866355, 42.697866831005435];//TODO Location SOFIA BULGARIA
 const zoomMap = 8;
 const App: FC = () => {
 
 
-  const [findAddresses, setFindAddresses] = useState<string[] | undefined>([])
-  const [center, setCenter] = useState(centerMap)
-  const [zoom, setZoom] = useState<number>(zoomMap)
-  const [longitude, setLongitude] = useState<number | undefined>(undefined)
-  const [latitude, setLatitude] = useState<number | undefined>(undefined)
+  const [findAddresses, setFindAddresses] = useState<string[] | undefined>([]);
+  const [center, setCenter] = useState(centerMap);
+  const [zoom, setZoom] = useState<number>(zoomMap);
+  const [longitude, setLongitude] = useState<number | undefined>(undefined);
+  const [latitude, setLatitude] = useState<number | undefined>(undefined);
 
 
 
@@ -25,7 +26,6 @@ const App: FC = () => {
     const formData = new FormData(e.currentTarget);
 
     const address = formData.get('address');
-
 
 
     if (address !== null && (typeof address === 'string')) {
@@ -43,11 +43,13 @@ const App: FC = () => {
 
       }).catch((err) => {
         console.log(err)
-      })
+      });
 
-    }
+    };
 
-  }
+  };
+
+
 
   const onHandleChange = async (e: BaseSyntheticEvent) => {
 
@@ -57,36 +59,40 @@ const App: FC = () => {
 
 
       await arcgisService.findSuggestAdress(address.value).then((data) => {
-        setFindAddresses(data.suggestions)
+        setFindAddresses(data.suggestions);
 
       }).catch((err) => {
-        console.log(err)
+        console.log(err);
       })
 
     } else {
-      setFindAddresses(undefined)
-    }
-  }
+      setFindAddresses(undefined);
+    };
+  };
 
 
   const handleClickSuggestion = (e: BaseSyntheticEvent<object, any, any>) => {
-    const seggestion = e.target as HTMLLIElement
-    const input = document.getElementsByTagName('input')[0]
+    const seggestion = e.target as HTMLLIElement;
+    const input = document.getElementsByTagName('input')[0];
     input.value = seggestion.innerText;
-    setFindAddresses([])
-  }
+    setFindAddresses([]);//TODO SHOW or HIDE suggestions ?
+  };
+
+
 
   return (
     <div className="App">
-      <Header />
-      <main>
-        <Map center={center} zoom={zoom} longitude={longitude} latitude={latitude} />
-        <FindAddress
-          findAddresses={findAddresses}
-          onHandleSubmit={onHandleSubmit} onHandleChange={onHandleChange}
-          handleClickSuggestion={handleClickSuggestion} />
-      </main>
-      <Footer />
+      <ErrorBoundary>
+        <Header />
+        <main>
+          <Map center={center} zoom={zoom} longitude={longitude} latitude={latitude} />
+          <FindAddress
+            findAddresses={findAddresses}
+            onHandleSubmit={onHandleSubmit} onHandleChange={onHandleChange}
+            handleClickSuggestion={handleClickSuggestion} />
+        </main>
+        <Footer />
+      </ErrorBoundary>
     </div>
   );
 }
