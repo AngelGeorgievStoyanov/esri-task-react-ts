@@ -1,81 +1,31 @@
-import { BaseSyntheticEvent, FC, useState } from "react";
-import * as arcgisService from '../services/arcgisService'
+import { BaseSyntheticEvent, FC, ReactElement } from "react";
 import './FindAddress.css'
 
+interface FindAddressProps {
+
+    onHandleSubmit: (e: BaseSyntheticEvent) => Promise<void>,
+    onHandleChange: (e: BaseSyntheticEvent) => Promise<void>,
+    findAddresses: string[] | undefined,
+    handleClickSuggestion: any
+
+}
+
+const FindAddress: FC<FindAddressProps> = ({ onHandleSubmit, onHandleChange, findAddresses, handleClickSuggestion }): ReactElement => {
 
 
-const FindAddress: FC = () => {
-
-    const [findAdrresses, setFindAdrresses] = useState<string[] | undefined>([])
-
-    const onHandleSubmit = async (e: BaseSyntheticEvent) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-
-        const address = formData.get('address');
-
-        console.log(address)
-
-        if (address !== null && (typeof address === 'string')) {
-            await arcgisService.findAddress(address).then((data) => {
-
-                console.log(data)
-
-
-            }).catch((err) => {
-                console.log(err)
-            })
-        } else {
-            setFindAdrresses(undefined)
-        }
-    }
-
-
-    const onHandleChange = async (e: BaseSyntheticEvent) => {
-
-        const address = e.target as HTMLInputElement
-
-        console.log(address.value)
-
-        await arcgisService.findSuggestAdress(address.value).then((data) => {
-
-            console.log(data)
-            setFindAdrresses(data.suggestions)
-
-        }).catch((err) => {
-            console.log(err)
-        })
-
-    }
-
-    const handleClickSuggestion = (e: BaseSyntheticEvent<object, any, any>) => {
-
-        const seggestion = e.target as HTMLLIElement;
-
-        console.log(seggestion.innerText)
-        const input = document.getElementsByTagName('input')[0]
-
-        input.value = seggestion.innerText;
-       
-       
-        setFindAdrresses([]) //TODO
-
-    }
+  
     return (
-        <main>
 
-            <form onSubmit={onHandleSubmit} className='form-search-address'>
-                <div className='form-div'>
-                    <h3>Търсене на адрес</h3>
-                    <input type='text' name='address' onChange={onHandleChange} />
-                    <input type="submit" className='form-inp-submit' value='Намери' />
-                </div>
+        <form onSubmit={onHandleSubmit} className='form-search-address'>
+            <div className='form-div'>
+                <h3>Търсене на адрес</h3>
+                <input type='text' name='address' onChange={onHandleChange} />
+                <input type="submit" className='form-inp-submit' value='Намери' />
+            </div>
 
-                {(findAdrresses !== undefined) ? findAdrresses.map((x: any) => <li className='form-li-suggestion' key={x.text} onClick={handleClickSuggestion}>{x.text}</li>) : ''}
+            {(findAddresses !== undefined) ? findAddresses.map((x: any) => <li className='form-li-suggestion' key={x.text} onClick={handleClickSuggestion}>{x.text}</li>) : ''}
 
-            </form>
-        </main>
+        </form>
     )
 }
 

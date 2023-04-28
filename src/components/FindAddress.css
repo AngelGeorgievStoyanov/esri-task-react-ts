@@ -1,11 +1,3 @@
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    justify-content: space-around;
-}
-
 .form-search-address {
     display: flex;
     flex-direction: column;
@@ -13,6 +5,9 @@ main {
     min-height: auto;
     border: solid 1px;
     padding: 20px;
+    background-color: #d1dcdc;
+    box-shadow: 2px 2px 4px black;
+    margin-bottom: 10px;
 }
 
 
@@ -34,12 +29,24 @@ main {
 
 }
 
+
+
 .form-li-suggestion:hover {
     background-color: #a0a4a4;
 }
 
+
 .form-inp-submit:hover {
     cursor: pointer;
     background-color: #a0a4a4;
+
+}
+
+
+@media screen and (max-width:500px) {
+    .form-search-address {
+        display: flex;
+        width: 65%;
+    }
 
 }
