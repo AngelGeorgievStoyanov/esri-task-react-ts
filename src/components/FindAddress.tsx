@@ -54,6 +54,12 @@ const FindAddress: FC = () => {
         const seggestion = e.target as HTMLLIElement;
 
         console.log(seggestion.innerText)
+        const input = document.getElementsByTagName('input')[0]
+
+        input.value = seggestion.innerText;
+       
+       
+        setFindAdrresses([]) //TODO
 
     }
     return (
@@ -63,7 +69,7 @@ const FindAddress: FC = () => {
                 <div className='form-div'>
                     <h3>Търсене на адрес</h3>
                     <input type='text' name='address' onChange={onHandleChange} />
-                    <input type="submit" value='Намери' />
+                    <input type="submit" className='form-inp-submit' value='Намери' />
                 </div>
 
                 {(findAdrresses !== undefined) ? findAdrresses.map((x: any) => <li className='form-li-suggestion' key={x.text} onClick={handleClickSuggestion}>{x.text}</li>) : ''}
