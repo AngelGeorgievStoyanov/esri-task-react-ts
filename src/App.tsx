@@ -27,8 +27,7 @@ const App: FC = () => {
 
     const address = formData.get('address');
 
-
-    if (address !== null && (typeof address === 'string')) {
+    if (typeof address === "string" && address.trim() !== "") {
 
       await arcgisService.findAddress(address).then((data) => {
 
