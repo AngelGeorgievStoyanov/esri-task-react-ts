@@ -20,7 +20,7 @@ const FindAddress: FC<FindAddressProps> = ({ onHandleSubmit, onHandleChange, fin
             <div className='form-div'>
                 <h3>Търсене на адрес</h3>
                 <input type='text' name='address' onChange={onHandleChange} />
-                <input type="submit" className='form-inp-submit' value='Намери' />
+                <input type="submit" className='form-inp-submit' value='Намери на картата' />
             </div>
 
             {(findAddresses !== undefined) ? findAddresses.map((x: any) => <li className='form-li-suggestion' key={x.text} onClick={handleClickSuggestion}>{x.text}</li>) : ''}

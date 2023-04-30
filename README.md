@@ -1,10 +1,22 @@
-# Getting Started with Create React App
+# Esri Bulgaria - Task for Front End Geospatial Developer
+# GitHub https://github.com/AngelGeorgievStoyanov/esri-task-react-ts
+## Author: Angel Stoyanov
+### Technologies used:
+* React-TypeSript
+* HTML
+* CSS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Functionality
+* Load Esri Map. Search on addresses, suggested addresses and add a point (marker) on the map. Responsive design. 
+
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm i`
+
+This command installs a package, and any packages that it depends on. 
 
 ### `npm start`
 
