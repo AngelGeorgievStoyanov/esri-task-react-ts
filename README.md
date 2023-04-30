@@ -2,7 +2,7 @@
 # GitHub https://github.com/AngelGeorgievStoyanov/esri-task-react-ts
 ## Author: Angel Stoyanov
 ### Technologies used:
-* React-TypeSript
+* React-TypeScript
 * HTML
 * CSS
 
